@@ -1,0 +1,2 @@
+apply plugin: 'java' //компиляция
+apply plugin: 'application' //для запуска
