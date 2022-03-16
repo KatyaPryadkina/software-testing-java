@@ -1,2 +1,3 @@
-apply plugin: 'java' //компиляция
-apply plugin: 'application' //для запуска
+apply plugin: 'java' 
+apply plugin: 'application' 
+mainClassName = 'ru.stqa.pft.sandbox.MyFirstProgramm'
