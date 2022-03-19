@@ -1,17 +1,16 @@
 package ru.stqa.pft.addressbook.appmanager;
 
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 
 import java.util.concurrent.TimeUnit;
 
-public class ApplicationManager  {
+public class ApplicationManager {
   public WebDriver wd;
 
+  private  NavigationHelper navigationHelper ;
   private  ContactsHelper contactsHelper ;
   private SessionHelper sessionHelper;
-  private  NavigationHelper navigationHelper;
   private GroupHelper groupHelper;
 
 
@@ -23,10 +22,6 @@ public class ApplicationManager  {
     sessionHelper = new SessionHelper(wd);
     contactsHelper = new ContactsHelper(wd);
     sessionHelper.login("admin", "secret");
-  }
-
-  public void returnToHomePage() {
-    wd.findElement(By.linkText("home")).click();
   }
 
   public void stop() {
@@ -45,4 +40,6 @@ public class ApplicationManager  {
   public ContactsHelper getContactsHelper() {
     return contactsHelper;
   }
+
+
 }

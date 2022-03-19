@@ -13,9 +13,7 @@ public class ContactsHelper {
   }
 
   //тут ПОДУМАТЬ, ИБО ЭТОТ МЕТОД НЕ ТОЛЬКО ДЛЯ КОНТАКТОВ А ДЛЯ ВСЕГО-yfdbufwbz
-  public void returnToHomePage() {
-    wd.findElement(By.linkText("home")).click();
-  }
+
 
   public void submitNewContact() {
     wd.findElement(By.xpath("//div[@id='content']/form/input[21]")).click();
