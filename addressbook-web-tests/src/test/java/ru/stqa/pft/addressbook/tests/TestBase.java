@@ -6,7 +6,8 @@ import ru.stqa.pft.addressbook.appmanager.ApplicationManager;
 
 public class TestBase {
 
-  protected final ApplicationManager app = new ApplicationManager(); //делигирование
+  //делигирование
+  protected final ApplicationManager app = new ApplicationManager();
 
   @BeforeMethod(alwaysRun = true)
   public void setUp() throws Exception {
@@ -19,4 +20,7 @@ public class TestBase {
 
   }
 
+  public ApplicationManager getApp() {
+    return app;
+  }
 }
