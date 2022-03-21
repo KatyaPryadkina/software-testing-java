@@ -39,17 +39,16 @@ public class ContactsHelper extends HelperBase {
   }
 
   public void selectObject() {
-    wd.findElement(By.id("1")).click();
+    click(By.id("1"));
     HelperBase.acceptNextAlert = true;
   }
-/*
-  public void editObject() {
-    click(By.xpath("//table[@id='maintable']/tbody/tr[8]/td[8]/a/img"));
 
-  }*/
+  public void editObject() {
+    click(By.xpath("//img[@alt='Edit']"));
+  }
 
   public void deleteSelectObject() {
-    wd.findElement(By.xpath("//input[@value='Delete']")).click();
+    click(By.xpath("//input[@value='Delete']"));
     assertTrue(closeAlertAndGetItsText().matches("^Delete 1 addresses[\\s\\S]$"));
   }
 
