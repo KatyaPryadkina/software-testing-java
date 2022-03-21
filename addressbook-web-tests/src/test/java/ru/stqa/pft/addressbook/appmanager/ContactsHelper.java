@@ -4,12 +4,15 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import ru.stqa.pft.addressbook.model.ContactData;
 
+import static org.testng.Assert.assertTrue;
+
 public class ContactsHelper extends HelperBase {
   //сслыку на этот драйвер можно исп только в этом классе
   //private WebDriver wd;
   //конструктор к которому обращается ApplicationManager
   public ContactsHelper(WebDriver wd) {
     super(wd);
+    boolean acceptNextAlert = true;
 
   }
 
@@ -30,4 +33,25 @@ public class ContactsHelper extends HelperBase {
   public void goToAddNewContact() {
     click(By.linkText("add new"));
     }
+
+  public void submitContactModification() {
+    click(By.name("update"));
+  }
+
+  public void selectObject() {
+    wd.findElement(By.id("1")).click();
+    HelperBase.acceptNextAlert = true;
+  }
+/*
+  public void editObject() {
+    click(By.xpath("//table[@id='maintable']/tbody/tr[8]/td[8]/a/img"));
+
+  }*/
+
+  public void deleteSelectObject() {
+    wd.findElement(By.xpath("//input[@value='Delete']")).click();
+    assertTrue(closeAlertAndGetItsText().matches("^Delete 1 addresses[\\s\\S]$"));
+  }
+
+
 }
