@@ -39,7 +39,7 @@ public class ContactsHelper extends HelperBase {
   }
 
   public void selectObject() {
-    click(By.id("1"));
+    click(By.name("selected[]"));
     HelperBase.acceptNextAlert = true;
   }
 
