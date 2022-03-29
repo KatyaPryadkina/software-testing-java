@@ -33,7 +33,7 @@ public class ApplicationManager {
       wd = new ChromeDriver();
     }
 
-    wd.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+    wd.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);// таймаут ожидания появления всп.окна на форме можно поставить в 0 либо закомментировать, иначе увеличить
     groupHelper = new GroupHelper(wd);
     navigationHelper = new NavigationHelper(wd);
     sessionHelper = new SessionHelper(wd);
