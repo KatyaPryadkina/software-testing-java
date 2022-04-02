@@ -14,7 +14,7 @@ public class GroupDeletionTests extends TestBase {
   public void testGroupDeletion() throws Exception { //public - класс общедоступен
     app.getNavigationHelper().goToGroupPage();
     if (!app.getGroupHelper().isThereAGroup()) {
-      app.getGroupHelper().createGroup(new GroupData("test4", "test4", "test4"));
+      app.getGroupHelper().createGroup(new GroupData(null, "test4", "test4", "test4"));
     }
     List<GroupData> before = app.getGroupHelper().getGroupList();
     app.getGroupHelper().selectGroup(before.size() - 1);
