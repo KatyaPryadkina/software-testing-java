@@ -4,7 +4,7 @@ import org.testng.Assert;
 import org.testng.annotations.Test;
 import ru.stqa.pft.addressbook.model.GroupData;
 
-import java.util.HashSet;
+import java.util.Comparator;
 import java.util.List;
 
 //extends TestBase -наследование , чтобы можно было обращаться к объектам другого класса
@@ -20,9 +20,11 @@ public class GroupCreationTests extends TestBase {
     List<GroupData> after = app.getGroupHelper().getGroupList();
     Assert.assertEquals(after.size(), before.size() + 1);
 
-    group.setId(after.stream().max((o1, o2) -> Integer.compare(o1.getid(), o2.getid())).get().getid());
     before.add(group);
-    Assert.assertEquals(new HashSet<Object>(before), new HashSet<Object>(after));
+    Comparator<? super GroupData> byId = (g1, g2) -> Integer.compare(g1.getid(), g2.getid());
+    before.sort(byId);
+    after.sort(byId);
+    Assert.assertEquals(before, after);
 
 
   }
