@@ -9,6 +9,7 @@ import ru.stqa.pft.addressbook.model.ContactData;
 import static org.testng.Assert.assertTrue;
 
 public class ContactsHelper extends HelperBase {
+
   //сслыку на этот драйвер можно исп только в этом классе
   //private WebDriver wd;
   //конструктор к которому обращается ApplicationManager
@@ -35,12 +36,12 @@ public class ContactsHelper extends HelperBase {
     } else {
       Assert.assertFalse(isElementPresent(By.name("new_group")));
     }
- }
+  }
 
 
   public void goToAddNewContact() {
     click(By.linkText("add new"));
-    }
+  }
 
   public void submitContactModification() {
     click(By.name("update"));
@@ -61,4 +62,15 @@ public class ContactsHelper extends HelperBase {
   }
 
 
+  public void createContact(ContactData contact) {
+    goToAddNewContact();
+    fillContactForm(contact, true);
+    submitNewContact();
+
+
+  }
+
+  public boolean isThereAContact() {
+    return isElementPresent(By.name("selected[]"));
+  }
 }
