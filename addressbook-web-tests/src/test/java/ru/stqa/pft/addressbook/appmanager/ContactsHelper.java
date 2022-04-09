@@ -52,7 +52,7 @@ public class ContactsHelper extends HelperBase {
   public void selectObject(int index) {
     wd.findElements(By.name("selected[]")).get(index).click();
     //click(By.name("selected[]"));
-    //HelperBase.acceptNextAlert = true;
+    HelperBase.acceptNextAlert = true;
   }
 
   public void editObject() {
@@ -87,10 +87,10 @@ public class ContactsHelper extends HelperBase {
 
   public List<ContactData> getContactList() {
     List<ContactData> contacts = new ArrayList<ContactData>();
-    List<WebElement> elements = wd. findElements(By.tagName("tr"));
-    for (WebElement element : elements) {
-      List<WebElement> elements1 = wd. findElements(By.tagName("td"));
-      int id = Integer.parseInt(elements1.get(0).findElement(By.tagName("input")).getAttribute("value"));
+    List<WebElement> elements = wd.findElements(By.tagName("tr"));
+    for (int index = 1; index < elements.size(); index++) {
+      int id = Integer.parseInt(elements.get(index).findElement(By.tagName("input")).getAttribute("value"));
+      List<WebElement> elements1 = wd.findElements(By.tagName("td"));
       String firstname = elements1.get(2).getText();
       String lastname = elements1.get(1).getText();
       ContactData contact = new ContactData(id, firstname, lastname, null, null, null, null, null);

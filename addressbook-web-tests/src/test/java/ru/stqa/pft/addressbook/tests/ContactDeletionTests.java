@@ -15,12 +15,16 @@ public class ContactDeletionTests extends TestBase {
     }
     app.getNavigationHelper().returnToHomePage();
     List<ContactData> before = app.getContactsHelper().getContactList();
-    app.getContactsHelper().selectObject(0);
+    app.getContactsHelper().selectObject(before.size() - 1);
     app.getContactsHelper().deleteSelectObject();
     app.getContactsHelper().acceptDelete();
     app.getNavigationHelper().returnToHomePage();
     List<ContactData> after = app.getContactsHelper().getContactList();
     Assert.assertEquals(after.size(), before.size() - 1);
+
+    before.remove(before.size() - 1);
+    Assert.assertEquals(before, after);
+
   }
 
 }
