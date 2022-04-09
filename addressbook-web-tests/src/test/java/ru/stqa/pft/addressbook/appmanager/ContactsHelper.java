@@ -2,11 +2,13 @@ package ru.stqa.pft.addressbook.appmanager;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
 import ru.stqa.pft.addressbook.model.ContactData;
 
-import static org.testng.Assert.assertTrue;
+import java.util.ArrayList;
+import java.util.List;
 
 public class ContactsHelper extends HelperBase {
 
@@ -59,7 +61,10 @@ public class ContactsHelper extends HelperBase {
 
   public void deleteSelectObject() {
     click(By.xpath("//input[@value='Delete']"));
-    assertTrue(closeAlertAndGetItsText().matches("^Delete 1 addresses[\\s\\S]$"));
+  }
+
+  public void acceptDelete() {
+    wd.switchTo().alert().accept();
   }
 
 
@@ -78,5 +83,11 @@ public class ContactsHelper extends HelperBase {
   public int getContactCount() {
     return wd.findElements(By.name("selected[]")).size();
 
+  }
+
+  public List<ContactData> getContactList() {
+    List<ContactData> contacts = new ArrayList<ContactData>();
+List<WebElement> elements = wd.findElements(By.name("selected[]"));
+    return contacts;
   }
 }
