@@ -4,8 +4,7 @@ import org.testng.Assert;
 import org.testng.annotations.Test;
 import ru.stqa.pft.addressbook.model.ContactData;
 
-import java.util.HashSet;
-import java.util.List;
+import java.util.*;
 
 public class ContactModificationTests extends TestBase {
   @Test
@@ -29,7 +28,12 @@ public class ContactModificationTests extends TestBase {
 
     before.remove(before.size() - 1);
     before.add(contact);
-    Assert.assertEquals(new HashSet<Object>(before), new HashSet<Object>(after));
+    Comparator<? super ContactData> byFirstName = Comparator.comparing(ContactData::getFirstname);
+    Comparator<? super ContactData> byLastName = Comparator.comparing(ContactData::getLastname);
+
+    before.sort(byFirstName);before.sort(byLastName);
+    after.sort(byFirstName);   after.sort(byLastName);
+    Assert.assertEquals(before, after);
   }
 
 
