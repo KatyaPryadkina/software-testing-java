@@ -47,8 +47,9 @@ public class ContactsHelper extends HelperBase {
     click(By.name("update"));
   }
 
-  public void selectObject() {
-    click(By.name("selected[]"));
+  public void selectObject(int index) {
+    wd.findElements(By.name("selected[]")).get(index).click();
+    //click(By.name("selected[]"));
     HelperBase.acceptNextAlert = true;
   }
 

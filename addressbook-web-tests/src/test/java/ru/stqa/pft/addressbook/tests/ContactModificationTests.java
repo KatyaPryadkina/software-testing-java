@@ -13,7 +13,7 @@ public class ContactModificationTests extends TestBase {
     }
     app.getNavigationHelper().returnToHomePage();
     int before = app.getContactsHelper().getContactCount();
-    app.getContactsHelper().selectObject();
+    app.getContactsHelper().selectObject(before - 1);
     app.getContactsHelper().editObject();
     //станд окно
     app.getContactsHelper().fillContactForm(new ContactData("Petr", "Petrov", "petya", "Ленина 8", "petrov@mail.ru", "+79521458745", "[none]"), false);

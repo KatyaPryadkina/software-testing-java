@@ -13,7 +13,7 @@ public class ContactDeletionTests extends TestBase {
     }
     app.getNavigationHelper().returnToHomePage();
     int before = app.getContactsHelper().getContactCount();
-    app.getContactsHelper().selectObject();
+    app.getContactsHelper().selectObject(before - 1);
     app.getContactsHelper().deleteSelectObject();
     app.getNavigationHelper().returnToHomePage();
     int after = app.getContactsHelper().getContactCount();
