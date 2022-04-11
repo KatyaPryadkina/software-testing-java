@@ -9,10 +9,10 @@ import java.util.*;
 
 public class ContactModificationTests extends TestBase {
   @BeforeMethod
-  public void unsurePreconditions(){
+  public void unsurePreconditions() {
     app.goTo().homePage();
-    if (app.contact().list().size()==0) {
-      app.contact().create(new ContactData().withLastname("Petr").withFirstname("Petrov").withNickname("petya").withAddress("Ленина 8").withEmail("petrov@mail.ru").withMobilNumber("+79521458745").withGroup("[none]"));
+    if (app.contact().all().size() == 0) {
+      app.contact().create(new ContactData().withLastname("Petrov").withFirstname("Petr").withNickname("petya").withAddress("Ленина 8").withEmail("petrov@mail.ru").withMobilNumber("+79521458745").withGroup("[none]"));
     }
   }
 
@@ -20,26 +20,19 @@ public class ContactModificationTests extends TestBase {
   public void contactModification() {
 
     app.goTo().homePage();
-    List<ContactData> before = app.contact().list();
-    int index = before.size() - 1;
-    ContactData contact = new ContactData().withId(before.get(before.size() - 1).getId()).withLastname("Petr").withFirstname("Petrov").withNickname("petya").withAddress("Ленина 8").withEmail("petrov@mail.ru").withMobilNumber("+79521458745").withGroup("[none]");
-    app.contact().modify(index, contact);
+    Set<ContactData> before = app.contact().all();
+    ContactData modifiedContact = before.iterator().next();
+    ContactData contact = new ContactData().withId(modifiedContact.getId()).withLastname("Petrov").withFirstname("Petr").withNickname("petya").withAddress("Ленина 8").withEmail("petrov@mail.ru").withMobilNumber("+79521458745").withGroup("[none]");
+    app.contact().modify(contact);
     app.goTo().homePage();
-    List<ContactData> after = app.contact().list();
+    Set<ContactData> after = app.contact().all();
     Assert.assertEquals(after.size(), before.size());
 
 
-    before.remove(index);
+    before.remove(modifiedContact);
     before.add(contact);
-    Comparator<? super ContactData> byFirstName = Comparator.comparing(ContactData::getFirstname);
-    Comparator<? super ContactData> byLastName = Comparator.comparing(ContactData::getLastname);
-
-    before.sort(byFirstName);before.sort(byLastName);
-    after.sort(byFirstName);   after.sort(byLastName);
     Assert.assertEquals(before, after);
   }
-
-
 
 
 }

@@ -5,8 +5,9 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import ru.stqa.pft.addressbook.model.ContactData;
 
-import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 public class ContactsHelper extends HelperBase {
 
@@ -47,10 +48,9 @@ public class ContactsHelper extends HelperBase {
     click(By.name("update"));
   }
 
-  public void selectObject(int index) {
-    wd.findElements(By.name("selected[]")).get(index).click();
-    //click(By.name("selected[]"));
-    HelperBase.acceptNextAlert = true;
+
+    public void selectObjectById(int id) {
+    wd.findElement(By.cssSelector("input[value='" + id + "']")).click();
   }
 
   public void editObject() {
@@ -74,15 +74,17 @@ public class ContactsHelper extends HelperBase {
 
   }
 
-  public void modify(int index, ContactData contact) {
-    selectObject(index);
+  public void modify(ContactData contact) {
+    selectObjectById(contact.getId());
     editObject();
     fillContactForm(contact);
     submitContactModification();
   }
 
-  public void deleteContact(int index) {
-    selectObject(index);
+
+
+  public void delete(ContactData contact) {
+    selectObjectById(contact.getId());
     deleteSelectObject();
     acceptDelete();
   }
@@ -96,7 +98,7 @@ public class ContactsHelper extends HelperBase {
 
   }
 
-  public List<ContactData> list() {
+ /* public List<ContactData> list() {     //списки
     List<ContactData> contacts = new ArrayList<ContactData>();
     List<WebElement> elements = wd.findElements(By.tagName("tr"));
     for (int index = 1; index < elements.size(); index++) {
@@ -107,5 +109,20 @@ public class ContactsHelper extends HelperBase {
       contacts.add(new ContactData().withId(id).withFirstname(firstname).withLastname(lastname));
     }
     return contacts;
+  }*/
+
+  public Set<ContactData> all() {         //множество
+    Set<ContactData> contacts = new HashSet<ContactData>();
+    List<WebElement> elements = wd.findElements(By.tagName("tr"));
+    for (int index = 1; index < elements.size(); index++) {
+      int id = Integer.parseInt(elements.get(index).findElement(By.tagName("input")).getAttribute("value"));
+      List<WebElement> elements1 = wd.findElements(By.tagName("td"));
+      String firstname = elements1.get(2).getText();
+      String lastname = elements1.get(1).getText();
+      contacts.add(new ContactData().withId(id).withFirstname(firstname).withLastname(lastname));
+    }
+    return contacts;
   }
+
+
 }

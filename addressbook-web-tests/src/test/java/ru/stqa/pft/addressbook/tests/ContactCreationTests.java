@@ -4,30 +4,24 @@ import org.testng.Assert;
 import org.testng.annotations.Test;
 import ru.stqa.pft.addressbook.model.ContactData;
 
-import java.util.Comparator;
-import java.util.List;
+import java.util.Set;
 
 public class ContactCreationTests extends TestBase {
 
 
   @Test//(enabled = false)
   public void testContactCreation() throws Exception {
-    List<ContactData> before = app.contact().list();
+    Set<ContactData> before = app.contact().all();
     app.contact().goToAddNewContact();
-    ContactData contact = new ContactData().withLastname("Petr").withFirstname("Petrov").withNickname("petya").withAddress("Ленина 8").withEmail("petrov@mail.ru").withMobilNumber("+79521458745").withGroup("[none]");
+    ContactData contact = new ContactData().withLastname("Petrov").withFirstname("Petr").withNickname("petya").withAddress("Ленина 8").withEmail("petrov@mail.ru").withMobilNumber("+79521458745").withGroup("[none]");
     app.contact().create(contact);
     app.goTo().homePage();
-    List<ContactData> after = app.contact().list();
+    Set<ContactData> after = app.contact().all();
     Assert.assertEquals(after.size(), before.size() + 1);
 
 
+    contact.withId(after.stream().mapToInt((c) -> c.getId()).max().getAsInt());
     before.add(contact);
-    //Comparator<? super ContactData> byId = (c1, c2) -> Integer.compare(c1.getId(), c2.getId());
-    Comparator<? super ContactData> byFirstName = Comparator.comparing(ContactData::getFirstname);
-    Comparator<? super ContactData> byLastName = Comparator.comparing(ContactData::getLastname);
-
-    before.sort(byFirstName);before.sort(byLastName);
-    after.sort(byFirstName);   after.sort(byLastName);
     Assert.assertEquals(before, after);
 
 
