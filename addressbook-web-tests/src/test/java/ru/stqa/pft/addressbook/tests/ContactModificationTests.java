@@ -7,7 +7,7 @@ import ru.stqa.pft.addressbook.model.ContactData;
 import java.util.*;
 
 public class ContactModificationTests extends TestBase {
-  @Test
+  @Test(enabled = false)
   public void contactModification() {
     app.getNavigationHelper().returnToHomePage();
     if (!app.getContactsHelper().isThereAContact()) {
