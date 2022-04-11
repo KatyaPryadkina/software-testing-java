@@ -66,7 +66,7 @@ public class ContactsHelper extends HelperBase {
   }
 
 
-  public void createContact(ContactData contact) {
+  public void create(ContactData contact) {
     goToAddNewContact();
     fillContactForm(contact);
     submitNewContact();
@@ -74,7 +74,7 @@ public class ContactsHelper extends HelperBase {
 
   }
 
-  public void modifyContact(int index, ContactData contact) {
+  public void modify(int index, ContactData contact) {
     selectObject(index);
     editObject();
     fillContactForm(contact);
@@ -96,7 +96,7 @@ public class ContactsHelper extends HelperBase {
 
   }
 
-  public List<ContactData> getContactList() {
+  public List<ContactData> list() {
     List<ContactData> contacts = new ArrayList<ContactData>();
     List<WebElement> elements = wd.findElements(By.tagName("tr"));
     for (int index = 1; index < elements.size(); index++) {

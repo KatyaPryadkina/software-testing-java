@@ -10,22 +10,22 @@ import java.util.*;
 public class ContactModificationTests extends TestBase {
   @BeforeMethod
   public void unsurePreconditions(){
-    app.getNavigationHelper().returnToHomePage();
-    if (!app.getContactsHelper().isThereAContact()) {
-      app.getContactsHelper().createContact(new ContactData("Petr", "Petrov", "petya", "Ленина 8", "petrov@mail.ru", "+79521458745", "[none]"));
+    app.goTo().homePage();
+    if (app.contact().list().size()==0) {
+      app.contact().create(new ContactData("Petr", "Petrov", "petya", "Ленина 8", "petrov@mail.ru", "+79521458745", "[none]"));
     }
   }
 
   @Test//(enabled = false)
   public void contactModification() {
 
-    app.getNavigationHelper().returnToHomePage();
-    List<ContactData> before = app.getContactsHelper().getContactList();
+    app.goTo().homePage();
+    List<ContactData> before = app.contact().list();
     int index = before.size() - 1;
     ContactData contact = new ContactData(before.get(before.size() - 1).getId(),"Petr", "Petrov", "petya", "Ленина 8", "petrov@mail.ru", "+79521458745", "[none]");
-    app.getContactsHelper().modifyContact(index, contact);
-    app.getNavigationHelper().returnToHomePage();
-    List<ContactData> after = app.getContactsHelper().getContactList();
+    app.contact().modify(index, contact);
+    app.goTo().homePage();
+    List<ContactData> after = app.contact().list();
     Assert.assertEquals(after.size(), before.size());
 
 
