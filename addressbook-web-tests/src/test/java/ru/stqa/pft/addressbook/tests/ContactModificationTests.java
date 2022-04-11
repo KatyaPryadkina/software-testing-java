@@ -12,7 +12,7 @@ public class ContactModificationTests extends TestBase {
   public void unsurePreconditions(){
     app.goTo().homePage();
     if (app.contact().list().size()==0) {
-      app.contact().create(new ContactData("Petr", "Petrov", "petya", "Ленина 8", "petrov@mail.ru", "+79521458745", "[none]"));
+      app.contact().create(new ContactData().withLastname("Petr").withFirstname("Petrov").withNickname("petya").withAddress("Ленина 8").withEmail("petrov@mail.ru").withMobilNumber("+79521458745").withGroup("[none]"));
     }
   }
 
@@ -22,7 +22,7 @@ public class ContactModificationTests extends TestBase {
     app.goTo().homePage();
     List<ContactData> before = app.contact().list();
     int index = before.size() - 1;
-    ContactData contact = new ContactData(before.get(before.size() - 1).getId(),"Petr", "Petrov", "petya", "Ленина 8", "petrov@mail.ru", "+79521458745", "[none]");
+    ContactData contact = new ContactData().withId(before.get(before.size() - 1).getId()).withLastname("Petr").withFirstname("Petrov").withNickname("petya").withAddress("Ленина 8").withEmail("petrov@mail.ru").withMobilNumber("+79521458745").withGroup("[none]");
     app.contact().modify(index, contact);
     app.goTo().homePage();
     List<ContactData> after = app.contact().list();

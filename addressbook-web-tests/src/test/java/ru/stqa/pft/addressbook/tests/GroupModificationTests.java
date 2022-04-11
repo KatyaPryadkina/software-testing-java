@@ -14,7 +14,7 @@ public class GroupModificationTests extends TestBase {
   public void unsurePreconditions(){
     app.goTo().GroupPage();
     if (app.group().list().size()==0) {
-      app.group().create(new GroupData(0, "test4", "test4", "test4"));
+      app.group().create(new GroupData().withName("test4").withHeader("test4").withFooter("test4"));
     }
   }
 
@@ -24,7 +24,8 @@ public class GroupModificationTests extends TestBase {
 
     List<GroupData> before = app.group().list();
     int index = before.size() - 1;
-    GroupData group = new GroupData(before.get(index).getid(), "test4", "test2", "test3");
+    GroupData group = new GroupData()
+            .withId(before.get(index).getid()).withName("test4").withHeader("test2").withFooter("test3");
     app.group().modify(index, group);
     List<GroupData> after = app.group().list();
     Assert.assertEquals(after.size(), before.size());

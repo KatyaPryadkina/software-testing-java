@@ -3,41 +3,62 @@ package ru.stqa.pft.addressbook.model;
 import java.util.Objects;
 
 public class ContactData{
-  private  Integer id;
-  private final String firstname;
-  private final String lastname;
-  private final String nickname;
-  private final String address;
-  private final String email;
-  private final String mobilNumber;
-  private final String group;
+  private  Integer id = Integer.MAX_VALUE;
+  private  String firstname;
+  private  String lastname;
+  private  String nickname;
+  private  String address;
+  private  String email;
+  private  String mobilNumber;
+  private  String group;
 
 
 
-  public ContactData(Integer id, String firstname, String lastname, String nickname, String address, String email, String mobilNumber, String group) {
-    this.id = Integer.MAX_VALUE;
+
+  public ContactData withId(Integer id) {
+    this.id = id;
+    return this;
+  }
+  public ContactData withFirstname(String firstname) {
     this.firstname = firstname;
-    this.lastname = lastname;
-    this.nickname = nickname;
-    this.address = address;
-    this.email = email;
-    this.mobilNumber = mobilNumber;
-    this.group = group;
+    return this;
+
   }
 
-  public ContactData( String firstname, String lastname, String nickname, String address, String email, String mobilNumber, String group) {
-    this.id = id;
-    this.firstname = firstname;
+  public ContactData withLastname(String lastname) {
     this.lastname = lastname;
-    this.nickname = nickname;
-    this.address = address;
-    this.email = email;
-    this.mobilNumber = mobilNumber;
-    this.group = group;
+    return this;
+
   }
 
-  public void setId(Integer id) {
-    this.id = id;
+  public ContactData withNickname(String nickname) {
+    this.nickname = nickname;
+    return this;
+
+  }
+
+  public ContactData withAddress(String address) {
+    this.address = address;
+    return this;
+
+  }
+
+  public ContactData withEmail(String email) {
+    this.email = email;
+    return this;
+
+  }
+
+  public ContactData withMobilNumber(String mobilNumber) {
+    this.mobilNumber = mobilNumber;
+    return this;
+
+  }
+
+  public ContactData withGroup(String group) {
+    this.group = group;
+    return this;
+
   }
 
 

@@ -104,8 +104,7 @@ public class ContactsHelper extends HelperBase {
       List<WebElement> elements1 = wd.findElements(By.tagName("td"));
       String firstname = elements1.get(2).getText();
       String lastname = elements1.get(1).getText();
-      ContactData contact = new ContactData(id, firstname, lastname, null, null, null, null, null);
-      contacts.add(contact);
+      contacts.add(new ContactData().withId(id).withFirstname(firstname).withLastname(lastname));
     }
     return contacts;
   }
