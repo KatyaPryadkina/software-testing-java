@@ -10,7 +10,7 @@ import java.util.List;
 public class ContactCreationTests extends TestBase {
 
 
-  @Test(enabled = false)
+  @Test//(enabled = false)
   public void testContactCreation() throws Exception {
     List<ContactData> before = app.getContactsHelper().getContactList();
     app.getContactsHelper().goToAddNewContact();

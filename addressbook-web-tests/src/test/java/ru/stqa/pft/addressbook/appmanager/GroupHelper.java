@@ -8,12 +8,13 @@ import ru.stqa.pft.addressbook.model.GroupData;
 import java.util.ArrayList;
 import java.util.List;
 
-public class GroupHelper extends HelperBase{
+public class GroupHelper extends HelperBase {
 
   public GroupHelper(WebDriver wd) {
     super(wd);
   }
-//super - обращение к конструктору базового класса
+
+  //super - обращение к конструктору базового класса
   public void returnToGroupPage() {
     click(By.linkText("groups"));
   }
@@ -39,7 +40,7 @@ public class GroupHelper extends HelperBase{
 
   public void selectGroup(int index) {
     wd.findElements(By.name("selected[]")).get(index).click();
-      }
+  }
 
   public void initGroupModification() {
     click(By.name("edit"));
@@ -56,6 +57,20 @@ public class GroupHelper extends HelperBase{
     returnToGroupPage();
   }
 
+  public void modifyGroup(int index, GroupData group) {
+    selectGroup(index);
+    initGroupModification();
+    fillGroupForm(group);
+    submitGroupModification();
+    returnToGroupPage();
+  }
+
+  public void deleteGroup(List<GroupData> before) {
+    selectGroup(before.size() - 1);
+    deleteSelectedGroups();
+    returnToGroupPage();
+  }
+
   public boolean isThereAGroup() {
     return isElementPresent(By.name("selected[]"));
   }
@@ -67,7 +82,7 @@ public class GroupHelper extends HelperBase{
   public List<GroupData> getGroupList() {
     List<GroupData> groups = new ArrayList<GroupData>();
     List<WebElement> elements = wd.findElements(By.cssSelector("span.group"));
-    for (WebElement element : elements ){
+    for (WebElement element : elements) {
       String name = element.getText();
       int id = Integer.parseInt(element.findElement(By.tagName("input")).getAttribute("value"));
       GroupData group = new GroupData(id, name, null, null);
