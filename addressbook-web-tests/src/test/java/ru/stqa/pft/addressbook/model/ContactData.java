@@ -132,6 +132,14 @@ public class ContactData{
     return address;
   }
 
+  public String getHomeNumber() {
+    return homeNumber;
+  }
+
+  public String getWorkNumber() {
+    return workNumber;
+  }
+
   public String getEmail() {
     return email;
   }
