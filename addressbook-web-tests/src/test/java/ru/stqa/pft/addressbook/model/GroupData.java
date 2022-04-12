@@ -79,7 +79,7 @@ public class GroupData {
   }
 
   @Override
-  public int hashCode() {
+  public int hashCode() {                                      //хэширование, более быстрая проверка, при помощи более быстрой операции. Быстрее,чем equals
     return Objects.hash(id, name);
   }
 
