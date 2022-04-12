@@ -10,6 +10,8 @@ public class ContactData{
   private  String address;
   private  String email;
   private  String mobilNumber;
+  private  String homeNumber;
+  private  String workNumber;
   private  String group;
 
 
@@ -54,6 +56,18 @@ public class ContactData{
 
   public ContactData withMobilNumber(String mobilNumber) {
     this.mobilNumber = mobilNumber;
+    return this;
+
+  }
+
+  public ContactData withHomeNumber(String homeNumber) {
+    this.homeNumber = homeNumber;
+    return this;
+
+  }
+
+  public ContactData withWorkNumber(String workNumber) {
+    this.workNumber = workNumber;
     return this;
 
   }
