@@ -16,7 +16,9 @@ public class ContactPhoneTest extends TestBase {
   public void unsurePreconditions() {
     app.goTo().homePage();
     if (app.contact().all().size() == 0) {
-      app.contact().create(new ContactData().withLastname("Petrov").withFirstname("Petr").withNickname("petya").withAddress("Ленина 8").withEmail("petrov@mail.ru").withMobilNumber("+79521458745").withGroup("[none]"));
+      app.contact().create(new ContactData().withLastname("Petrov").withFirstname("Petr").withNickname("petya")
+              .withAddress("Ленина 8").withEmail1("petrov@mail.ru")
+              .withMobilNumber("+79521458745").withGroup("[none]"));
     }
   }
   @Test
@@ -25,7 +27,17 @@ public class ContactPhoneTest extends TestBase {
     ContactData contact = app.contact().all().iterator().next();
     ContactData contactInfoFromEditForm = app.contact().infoFromEditForm(contact);
 
+    assertThat(contact.getAddress(), equalTo(contactInfoFromEditForm.getAddress()));
     assertThat(contact.getAllPhones(), equalTo(mergePhones(contactInfoFromEditForm)));
+    assertThat(contact.getAllEmail(), equalTo(mergeEmail(contactInfoFromEditForm)));
+
+
+  }
+
+  private String mergeEmail(ContactData contact) {
+    return Arrays.asList(contact.getEmail1(), contact.getEmail2(), contact.getEmail3())
+            .stream().filter((s) -> !s.equals(""))
+            .collect(Collectors.joining("\n"));
 
   }
 
