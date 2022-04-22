@@ -125,8 +125,9 @@ public class ContactsHelper extends HelperBase {
       List<WebElement> elements1 = wd.findElements(By.tagName("td"));
       String firstname = elements1.get(2).getText();
       String lastname = elements1.get(1).getText();
-      String[] phones = elements1.get(5).getText().split("\n");           //split = резать строки
-      contactCache.add(new ContactData().withId(id).withFirstname(firstname).withLastname(lastname).withHomeNumber(phones[0]).withMobilNumber(phones[1]).withWorkNumber(phones[2]));
+     // String[] phones = elements1.get(5).getText().split("\n");           //split = резать строки,
+      String allPhones = elements1.get(5).getText();
+      contactCache.add(new ContactData().withId(id).withFirstname(firstname).withLastname(lastname).withAllPhones(allPhones));
     }
     return new Contacts(contactCache);
   }
