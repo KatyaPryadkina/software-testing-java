@@ -27,7 +27,7 @@ public class ContactCreationTests extends TestBase {
   }
 
 
-  @Test//негативный тест
+  @Test(enabled = false)//негативный тест
   public void testBadContactCreation() throws Exception {
     Contacts before = app.contact().all();
     app.contact().goToAddNewContact();

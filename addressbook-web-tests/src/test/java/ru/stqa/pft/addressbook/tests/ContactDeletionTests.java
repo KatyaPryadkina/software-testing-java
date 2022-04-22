@@ -1,6 +1,5 @@
 package ru.stqa.pft.addressbook.tests;
 
-import org.hamcrest.CoreMatchers;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import ru.stqa.pft.addressbook.model.ContactData;
@@ -29,7 +28,7 @@ public class ContactDeletionTests extends TestBase {
     assertThat(app.contact().count(), equalTo(before.size() - 1));
     Contacts after = app.contact().all();
 
-    assertThat(after, CoreMatchers.equalTo(before.without(deletedContact)));
+    assertThat(after, equalTo(before.without(deletedContact)));
 
   }
 

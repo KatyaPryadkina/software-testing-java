@@ -60,9 +60,7 @@ public class ContactsHelper extends HelperBase {
     click(By.xpath("//input[@value='Delete']"));
   }
 
-  public void acceptDelete() {
-    wd.switchTo().alert().accept();
-  }
+
 
 
   public void create(ContactData contact) {
@@ -73,6 +71,7 @@ public class ContactsHelper extends HelperBase {
 
 
   }
+
 
   public void modify(ContactData contact) {
     selectObjectById(contact.getId());

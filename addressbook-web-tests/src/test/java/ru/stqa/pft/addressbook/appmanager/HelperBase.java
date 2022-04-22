@@ -23,7 +23,14 @@ public class HelperBase {
 
 
   }
-//не используемый пока нигде метод, ссылка на параметр ему не нужна, он польз.тем что объявлен в классе //конструкция перехвата исключений try-попытка, catch-перехватить(тип исключения)
+
+  public void acceptDelete() {
+    wd.switchTo().alert().accept();
+  }
+
+
+  //не используемый пока нигде метод, ссылка на параметр ему не нужна, он польз.тем что объявлен в классе //конструкция перехвата исключений try-попытка, catch-перехватить(тип исключения)
+
   public  boolean isAlertPresent() {
     try {
       wd.switchTo().alert();
@@ -48,7 +55,7 @@ public class HelperBase {
     }
   }
 
-  protected boolean isElementPresent(By locator) {
+  protected boolean isElementPresent(By locator) {//поиск элемента на странице, если элемент не найдет срабатывает исключение
     try {
       wd.findElement(locator);
       return true;
