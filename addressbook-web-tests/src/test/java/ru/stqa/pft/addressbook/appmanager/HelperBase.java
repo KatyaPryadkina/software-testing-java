@@ -10,7 +10,7 @@ public class HelperBase {
   protected WebDriver wd;
 
   public HelperBase(WebDriver wd) {
-    this.wd=wd;
+    this.wd = wd;
   }
 
   protected void click(By locator) {
@@ -20,17 +20,17 @@ public class HelperBase {
   protected void type(By locator, String text) {
     click(locator);
 
-        wd.findElement(locator).clear();
-        wd.findElement(locator).sendKeys(text);
+    wd.findElement(locator).clear();
+    wd.findElement(locator).sendKeys(text);
 
 
   }
 
   protected void attach(By locator, File file) {
-    if (file !=null)
-  {
-    wd.findElement(locator).sendKeys(file.getAbsolutePath());        //метод преобразования относительного пути файла к абсолютному getAbsolutePath
-  }}
+    if (file != null) {
+      wd.findElement(locator).sendKeys(file.getAbsolutePath());        //метод преобразования относительного пути файла к абсолютному getAbsolutePath
+    }
+  }
 
   public void acceptDelete() {
     wd.switchTo().alert().accept();
@@ -39,17 +39,18 @@ public class HelperBase {
 
   //не используемый пока нигде метод, ссылка на параметр ему не нужна, он польз.тем что объявлен в классе //конструкция перехвата исключений try-попытка, catch-перехватить(тип исключения)
 
-  public  boolean isAlertPresent() {
+  public boolean isAlertPresent() {
     try {
       wd.switchTo().alert();
       return true;
     } catch (NoAlertPresentException e) {
       return false;
-     }
+    }
   }
+
   // для проставления галочки в списке и закрытия окна при удалении
   public String closeAlertAndGetItsText() {
-        try {
+    try {
       Alert alert = wd.switchTo().alert();
       String alertText = alert.getText();
       if (acceptNextAlert) {
