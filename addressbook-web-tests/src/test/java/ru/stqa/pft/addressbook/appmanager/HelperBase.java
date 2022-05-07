@@ -2,6 +2,8 @@ package ru.stqa.pft.addressbook.appmanager;
 
 import org.openqa.selenium.*;
 
+import java.io.File;
+
 public class HelperBase {
 
   protected static boolean acceptNextAlert;
@@ -23,6 +25,12 @@ public class HelperBase {
 
 
   }
+
+  protected void attach(By locator, File file) {
+    if (file !=null)
+  {
+    wd.findElement(locator).sendKeys(file.getAbsolutePath());        //метод преобразования относительного пути файла к абсолютному getAbsolutePath
+  }}
 
   public void acceptDelete() {
     wd.switchTo().alert().accept();

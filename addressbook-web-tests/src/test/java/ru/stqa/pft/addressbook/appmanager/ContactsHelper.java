@@ -30,6 +30,7 @@ public class ContactsHelper extends HelperBase {
     type(By.name("address"), contactData.address());
     type(By.name("email"), contactData.email());
     type(By.name("mobile"), contactData.mobilNumber());
+    attach(By.name("photo"), contactData.getPhoto());
 
    /* if (creation) {
       new Select(wd.findElement(By.name("new_group"))).selectByVisibleText(contactData.group());
@@ -53,8 +54,7 @@ public class ContactsHelper extends HelperBase {
   }
 
   public void editObject() {
-    click(By.xpath("//img[@alt='Edit']"));
-  }
+    click(By.xpath("//img[@alt='Edit']")); }
 
   public void deleteSelectObject() {
     click(By.xpath("//input[@value='Delete']"));
