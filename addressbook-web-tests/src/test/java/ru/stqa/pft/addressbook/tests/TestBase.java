@@ -8,7 +8,7 @@ import ru.stqa.pft.addressbook.appmanager.ApplicationManager;
 public class TestBase {
 
   //делигирование
-  protected static final  ApplicationManager app = new ApplicationManager(BrowserType.FIREFOX);
+  protected static final  ApplicationManager app = new ApplicationManager(System.getProperty("browser", BrowserType.FIREFOX));
 
   @BeforeSuite(alwaysRun = true)
   public void setUp() throws Exception {

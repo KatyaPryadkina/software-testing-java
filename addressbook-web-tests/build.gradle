@@ -1,27 +1,39 @@
-apply plugin: 'java' 
+apply plugin: 'java'
 
 
 repositories {
-	mavenCentral()
-	}
-
-dependencies {
-	implementation("org.testng:testng:7.5")
-	implementation 'org.seleniumhq.selenium:selenium-java:4.1.2'
-	implementation("org.hamcrest:java-hamcrest:2.0.0.0")
-	implementation 'com.beust:jcommander:1.82'
-	implementation 'com.thoughtworks.xstream:xstream:1.4.19'
-	implementation 'com.google.code.gson:gson:2.9.0'
-	}
-
-task testGroups (type: Test)  {
-	useTestNG {
-		suites 'src/test/resources/testng-groups.xml'
-	}
+    mavenCentral()
 }
 
-task testContacts (type: Test)  {
-	useTestNG {
-		suites 'src/test/resources/testng-contacts.xml'
-	}
+dependencies {
+    implementation("org.testng:testng:7.5")
+    implementation 'org.seleniumhq.selenium:selenium-java:4.1.2'
+    implementation("org.hamcrest:java-hamcrest:2.0.0.0")
+    implementation 'com.beust:jcommander:1.82'
+    implementation 'com.thoughtworks.xstream:xstream:1.4.19'
+    implementation 'com.google.code.gson:gson:2.9.0'
+}
+
+task testGroups(type: Test) {
+    useTestNG {
+        suites 'src/test/resources/testng-groups.xml'
+    }
+    if (project.hasProperty('browser')) {
+        systemProperty 'browser', "${browser}"
+    }
+    if (project.hasProperty('target')) {
+        systemProperty 'target', "${target}"
+    }
+}
+
+task testContacts(type: Test) {
+    useTestNG {
+        suites 'src/test/resources/testng-contacts.xml'
+    }
+    if (project.hasProperty('browser')) {
+        systemProperty 'browser', "${browser}"
+    }
+    if (project.hasProperty('target')) {
+        systemProperty 'target', "${target}"
+    }
 }
