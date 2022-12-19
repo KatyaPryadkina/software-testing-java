@@ -6,7 +6,7 @@ repositories {
 }
 
 dependencies {
-    implementation("org.testng:testng:7.5")
+    implementation("org.testng:testng:7.7.0")
     implementation 'org.seleniumhq.selenium:selenium-java:4.1.2'
     implementation("org.hamcrest:java-hamcrest:2.0.0.0")
     implementation 'com.beust:jcommander:1.82'
