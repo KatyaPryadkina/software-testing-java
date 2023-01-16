@@ -15,7 +15,6 @@ public class ContactsHelper extends HelperBase {
   //конструктор к которому обращается ApplicationManager
   public ContactsHelper(WebDriver wd) {
     super(wd);
-    boolean acceptNextAlert = true;
 
   }
 
@@ -50,15 +49,30 @@ public class ContactsHelper extends HelperBase {
 
 
   public void selectObjectById(int id) {
-    wd.findElement(By.cssSelector("input[value='" + id + "']")).click();
+    //wd.findElement(By.cssSelector("input[value='" + id + "']")).click();
+    wd.findElement(By.cssSelector(String.format("a[href='edit.php?id=%s']", id))).click();
   }
 
-  public void editObject() {
-    click(By.xpath("//img[@alt='Edit']")); }
+  /*public void initContactModificationById() {
+    click(By.xpath("//img[@alt='Edit']")); }*/
+
+  private void initContactModificationById(int id) {
+    /*WebElement checkbox = wd.findElement(By.cssSelector(String.format("input[value='%s']", id)));
+    WebElement row = checkbox.findElement(By.xpath("./../.."));
+    List<WebElement> cells = row.findElements(By.tagName("td"));
+    cells.get(7).findElement(By.tagName("a")).click();*/
+    wd.findElement(By.cssSelector(String.format("a[href='edit.php?id=%s']", id))).click();
+
+  }
+  //примеры локаторов
+  //WebElement checkbox = wd.findElement(By.xpath(String.format("//input[@value='%s']/../..td[8]/a",id))).click();
+  //WebElement checkbox = wd.findElement(By.xpath(String.format("//tr[.//input[@value='%s']]/td[8]/a",id))).click();
+  //WebElement checkbox = wd.findElement(By.cssSelector(String.format("a[href=edit.php?id=%s']".id))).click();
 
   public void deleteSelectObject() {
     click(By.xpath("//input[@value='Delete']"));
-  }
+    acceptDelete();
+      }
 
 
 
@@ -74,8 +88,7 @@ public class ContactsHelper extends HelperBase {
 
 
   public void modify(ContactData contact) {
-    selectObjectById(contact.getId());
-    editObject();
+    initContactModificationById(contact.getId());
     fillContactForm(contact);
     submitContactModification();
     contactCache = null;
@@ -85,7 +98,7 @@ public class ContactsHelper extends HelperBase {
   public void delete(ContactData contact) {
     selectObjectById(contact.getId());
     deleteSelectObject();
-    acceptDelete();
+    //acceptDelete();
     contactCache = null;
   }
 
@@ -153,15 +166,7 @@ public class ContactsHelper extends HelperBase {
             .withAddress(address);
   }
 
-  private void initContactModificationById(int id) {
-    WebElement checkbox = wd.findElement(By.cssSelector(String.format("input[value='%s']", id)));
-    WebElement row = checkbox.findElement(By.xpath("./../.."));
-    List<WebElement> cells = row.findElements(By.tagName("td"));
-    cells.get(7).findElement(By.tagName("a")).click();
-  }
 
-  //примеры локаторов
-  //WebElement checkbox = wd.findElement(By.xpath(String.format("//input[@value='%s']/../..td[8]/a",id))).click();
-  //WebElement checkbox = wd.findElement(By.xpath(String.format("//tr[.//input[@value='%s']]/td[8]/a",id))).click();
-  //WebElement checkbox = wd.findElement(By.cssSelector(String.format("a[href=edit.php?id=%s']".id))).click();
+
+
 }
