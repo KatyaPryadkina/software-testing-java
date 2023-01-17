@@ -13,8 +13,9 @@ public class GroupDeletionTests extends TestBase {
 
   @BeforeMethod
   public void unsurePreconditions() {
-    app.goTo().GroupPage();
-    if (app.group().all().size() == 0) {
+
+    if (app.db().groups().size() == 0) {
+      app.goTo().GroupPage();
       app.group().create(new GroupData().withName("test4").withHeader("test4").withFooter("test4"));
     }
   }
@@ -22,11 +23,12 @@ public class GroupDeletionTests extends TestBase {
   @Test
   public void testGroupDeletion() throws Exception { //public - класс общедоступен
 
-    Groups before = app.group().all();
+    Groups before = app.db().groups();// заменяется в зависимости от получения списков через бд или через интерфейс (app.group().all())
     GroupData deletetedGroup = before.iterator().next();
+    app.goTo().GroupPage();
     app.group().delete(deletetedGroup);
-    Groups after = app.group().all();
-    assertThat(app.group().count(), equalTo(before.size() - 1));
+    Groups after = app.db().groups();
+    assertThat(app.group().count(), equalTo(before.size() - 1)); // проверка хэша списка групп с интерфейса, остается для доп. контроля, но при получении списков из бд не очень нужно
     assertThat(after, equalTo(before.without(deletetedGroup))); //проверка
 
   }
