@@ -258,6 +258,11 @@ public class ContactData {
     public Groups getGroups() {
         return new Groups(groups); //множество превратили в объект типа groups, при этом создается копия
     }
+    public ContactData inGroup(GroupData group) {
+        groups.add(group);
+        return this;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
