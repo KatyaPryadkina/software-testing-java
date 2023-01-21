@@ -31,6 +31,8 @@ public class GroupDeletionTests extends TestBase {
     assertThat(app.group().count(), equalTo(before.size() - 1)); // проверка хэша списка групп с интерфейса, остается для доп. контроля, но при получении списков из бд не очень нужно
     assertThat(after, equalTo(before.without(deletetedGroup))); //проверка
 
+    verifyGroupListInUI();
+
   }
 
 

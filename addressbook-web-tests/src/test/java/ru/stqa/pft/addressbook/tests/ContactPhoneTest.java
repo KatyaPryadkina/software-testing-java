@@ -33,6 +33,7 @@ public class ContactPhoneTest extends TestBase {
     assertThat(contact.getAllPhones(), equalTo(mergePhones(contactInfoFromEditForm)));
     assertThat(contact.getAllEmail(), equalTo(mergeEmail(contactInfoFromEditForm)));
 
+    verifyContactListInUI();
 
   }
 
