@@ -63,7 +63,6 @@ public class ContactsHelper extends HelperBase {
     List<WebElement> cells = row.findElements(By.tagName("td"));
     cells.get(7).findElement(By.tagName("a")).click();*/
     wd.findElement(By.cssSelector(String.format("a[href='edit.php?id=%s']", id))).click();
-
   }
   //примеры локаторов
   //WebElement checkbox = wd.findElement(By.xpath(String.format("//input[@value='%s']/../..td[8]/a",id))).click();
@@ -133,16 +132,16 @@ public class ContactsHelper extends HelperBase {
       return new Contacts(contactCache);
     }
     contactCache = new Contacts();
-    List<WebElement> elements = wd.findElements(By.tagName("tr"));
-    for (int index = 1; index < elements.size(); index++) {
-      int id = Integer.parseInt(elements.get(index).findElement(By.tagName("input")).getAttribute("value"));
-      List<WebElement> elements1 = wd.findElements(By.tagName("td"));
-      String firstname = elements1.get(2).getText();
-      String lastname = elements1.get(1).getText();
+    List<WebElement> elements =  wd.findElements(By.name("entry"));
+    for (WebElement elements1 : elements) {
+      List<WebElement> elements2 = elements1.findElements(By.tagName("td"));
+      int id = Integer.parseInt(elements1.findElement(By.tagName("input")).getAttribute("value"));
+      String firstname = elements2.get(2).getText();
+      String lastname = elements2.get(1).getText();
      // String[] phones = elements1.get(5).getText().split("\n");           //split = резать строки,
-      String allPhones = elements1.get(5).getText();
-      String allEmails = elements1.get(4).getText();
-      String address = elements1.get(3).getText();
+      String allPhones = elements2.get(5).getText();
+      String allEmails = elements2.get(4).getText();
+      String address = elements2.get(3).getText();
       contactCache.add(new ContactData().withId(id).withFirstname(firstname).withLastname(lastname).withAllPhones(allPhones).withAddress(address).withAllEmail(allEmails));
     }
     return new Contacts(contactCache);

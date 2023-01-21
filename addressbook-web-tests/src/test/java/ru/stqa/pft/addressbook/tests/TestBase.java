@@ -4,6 +4,7 @@ import org.openqa.selenium.remote.BrowserType;
 import org.testng.annotations.AfterSuite;
 import org.testng.annotations.BeforeSuite;
 import ru.stqa.pft.addressbook.appmanager.ApplicationManager;
+import ru.stqa.pft.addressbook.model.Contacts;
 import ru.stqa.pft.addressbook.model.GroupData;
 import ru.stqa.pft.addressbook.model.Groups;
 
@@ -42,5 +43,9 @@ public class TestBase {
     }
 
 
+  }
+
+  public void verifyContactListInUI() {
+    Contacts dbContacts = app.db().contacts();
   }
 }
