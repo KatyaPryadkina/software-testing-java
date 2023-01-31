@@ -1,0 +1,29 @@
+apply plugin: 'java'
+
+
+repositories {//подключение места откуда будет тянутся библиотека
+    mavenCentral()
+}
+
+dependencies {
+    implementation("org.testng:testng:7.7.0")
+    implementation 'org.seleniumhq.selenium:selenium-java:4.1.3'
+    implementation("org.hamcrest:java-hamcrest:2.0.0.0")
+// библиотека для сравнения двух строк, «matcher»-ом является equalTo(), функция же assertThat()
+}
+
+test {
+    useTestNG {
+        suites 'src/test/resources/testng.xml'
+    }
+    if (project.hasProperty('browser')) {
+        systemProperty 'browser', "${browser}"
+    }
+    if (project.hasProperty('target')) { //конфиг.файл с описанием свойств окружения
+        systemProperty 'target', "${target}"
+    }
+    if (project.hasProperty('verifyUI')) {  //опция вкл/откл сложных проверок ч/з интерфейс
+        systemProperty 'verifyUI', "${verifyUI}"
+    }
+}
+
