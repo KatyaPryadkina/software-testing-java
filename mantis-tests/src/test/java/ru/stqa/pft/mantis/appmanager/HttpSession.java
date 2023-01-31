@@ -27,7 +27,7 @@ public class HttpSession {
     }
 
     public boolean login(String username, String password) throws IOException {             // метод для выполнения логина
-        HttpPost post = new HttpPost(app.getProperty("web.baseURL") + "/login.php");   // адрес
+        HttpPost post = new HttpPost(app.getProperty("web.baseURL") + "login_page.php");   // адрес
         List<NameValuePair> params = new ArrayList<NameValuePair>();
         params.add(new BasicNameValuePair("username", username));                       // формируются параметры для тела
         params.add(new BasicNameValuePair("password", password));
