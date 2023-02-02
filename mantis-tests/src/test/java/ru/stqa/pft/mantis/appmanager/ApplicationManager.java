@@ -20,6 +20,7 @@ public class ApplicationManager {
   private String browser;
   private RegistrarionHelper registrationHelper;
   private FtpHelper ftp;
+  private MailHelper mailHelper;
 
 
   public ApplicationManager(String browser)  {
@@ -65,16 +66,23 @@ public class ApplicationManager {
 
   public WebDriver getDriver() {
     if (wd == null) {
-      if (browser.equals(BrowserType.FIREFOX)) {
+      if (browser.equals(BrowserType.CHROME)) {
+        wd = new  ChromeDriver();
+      } else if (browser.equals(BrowserType.FIREFOX)) {
         wd = new FirefoxDriver();
-      } else if (browser.equals(BrowserType.IE)) {
+      } else if (browser.equals(BrowserType.IE )) {
         wd = new InternetExplorerDriver();
-      } else if (browser.equals(BrowserType.CHROME)) {
-        wd = new ChromeDriver();
-        wd.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);// таймаут ожидания появления всп.окна на форме можно поставить в 0 либо закомментировать, иначе увеличить
+        wd.manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);// таймаут ожидания появления всп.окна на форме можно поставить в 0 либо закомментировать, иначе увеличить
         wd.get(properties.getProperty("web.baseUrl"));
       }
     }
     return wd;
+  }
+
+  public MailHelper mail() {
+     if (mailHelper == null){
+       mailHelper = new  MailHelper(this);
+       }
+       return mailHelper;
   }
 }
