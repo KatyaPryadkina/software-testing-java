@@ -12,7 +12,7 @@ import java.util.stream.Collectors;
 
 public class  MailHelper {
     private ApplicationManager app;
-    private final Wiser wiser;
+    private final Wiser wiser;                  //почтовый сервер
 
     public MailHelper(ApplicationManager app) {
         this.app = app;
