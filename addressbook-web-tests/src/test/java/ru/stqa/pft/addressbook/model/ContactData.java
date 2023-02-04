@@ -14,7 +14,7 @@ import java.util.Set;
 @XStreamAlias("contact")
 @Entity
 @Table(name = "addressbook")
-public class ContactData {
+public class  ContactData {
     @XStreamOmitField
     @Id
     @Column(name = "id")
