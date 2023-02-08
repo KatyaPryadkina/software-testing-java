@@ -9,6 +9,7 @@ import ru.stqa.pft.addressbook.model.Contacts;
 import ru.stqa.pft.addressbook.model.GroupData;
 
 import java.util.List;
+import java.util.Set;
 
 public class ContactsHelper extends HelperBase {
 
@@ -78,20 +79,10 @@ public class ContactsHelper extends HelperBase {
         acceptDelete();
     }
 
-    public void selectGroup(GroupData group) {
 
-        click(By.name("to_group"));
-        new Select(wd.findElement(By.name("to_group"))).selectByVisibleText(group.getName());
-    }
 
-    public void addGroup() {
-
-        click(By.name("add"));
-    }
-
-    private void filterForGroup(ContactData contact) {
-        click(By.name("group"));
-        new Select(wd.findElement(By.name("group"))).selectByVisibleText(contact.getGroups().iterator().next().getName());
+    public void filterForGroup(int id) {
+        wd.findElement(By.cssSelector("select[name='group']>option[value='" + id + "']")).click();
 
     }
 
@@ -123,22 +114,21 @@ public class ContactsHelper extends HelperBase {
         contactCache = null;
     }
 
-    public void addInGroup(ContactData contact, GroupData group) {
-        selectObjectById(contact.getId());
-        selectGroup(group);
-        addGroup();
-        returnToContactPage();
+    public void addInGroup(String name) {
+
+        click(By.name("to_group"));
+        new Select(wd.findElement(By.name("to_group"))).selectByVisibleText(name);
+        click(By.name("add"));
         contactCache = null;
     }
 
-    public void removeContactFromGroup(ContactData contact ) {
-        filterForGroup(contact);
-        selectObjectById(contact.getId());
+    public void removeContactFromGroup() {
         removeFromGroup();
-       // returnToContactPageAll();
 
     }
-
+    public void selectGroup(String name) {
+        new Select(wd.findElement(By.name("group"))).selectByVisibleText(name);
+    }
 
 
     public void delete(ContactData contact) {
@@ -169,6 +159,16 @@ public class ContactsHelper extends HelperBase {
     }
     return contacts;
   }*/
+
+    public ContactData contactInGroup(Contacts contacts) {
+        for (ContactData contact : contacts) {
+            Set<GroupData> contactInGroup = contact.getGroups();
+            if (contact.getGroups().size() > 0) {
+                return contact;
+            }
+        }
+        return null;
+    }
 
     private Contacts contactCache = null;
 
