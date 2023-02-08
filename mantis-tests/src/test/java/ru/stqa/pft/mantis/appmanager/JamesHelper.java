@@ -115,7 +115,7 @@ public class JamesHelper {
         write("quit");
     }
 
-    public void drainEmail(String username, String password) throws MessagingException {
+    public void drainEmail(String username, String password) throws MessagingException {        //очистить почтовый ящик конкретного пользователя
         Folder inbox = openInbox(username, password);
         for (Message message : inbox.getMessages()) {
             message.setFlag(Flags.Flag.DELETED, true);
