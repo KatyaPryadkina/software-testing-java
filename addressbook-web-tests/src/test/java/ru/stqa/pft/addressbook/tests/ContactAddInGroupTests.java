@@ -42,9 +42,10 @@ public class ContactAddInGroupTests extends TestBase {
         Contacts contacts = app.db().contacts();
         ContactData contactSelect = contactOutsideTheGroup(contacts);
         ContactData before = contactSelect;
+        GroupData addedGroup = groupOutsideTheContact();
         app.contact().selectObjectById(contactSelect.getId());
         app.contact().addInGroup(groupOutsideTheContact().getName());
-        ContactData after = contactSelect;
+        ContactData after = contactSelect.inGroup(addedGroup);
 
         assertThat(after, equalTo(before));
         verifyContactListInUI();
