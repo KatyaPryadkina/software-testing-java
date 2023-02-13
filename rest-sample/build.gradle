@@ -1,0 +1,15 @@
+apply plugin: 'java'
+
+
+repositories {//подключение места откуда будет тянутся библиотека
+    mavenCentral()
+}
+
+dependencies {
+    implementation("org.testng:testng:7.7.0")
+    implementation 'com.google.code.gson:gson:2.9.0'// библиотека для сериализации/десериализации json
+    implementation("org.apache.httpcomponents:httpclient:4.5.13")  //библиотека http
+    implementation("org.apache.httpcomponents:fluent-hc:4.5.13")
+
+
+}
