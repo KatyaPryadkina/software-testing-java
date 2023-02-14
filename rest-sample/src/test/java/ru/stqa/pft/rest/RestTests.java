@@ -14,9 +14,10 @@ import java.util.Set;
 
 import static org.testng.Assert.assertEquals;
 
-public class RestTests {
+public class RestTests extends TestBase{
     @Test
     public void testCreateIssue() throws IOException {
+      //  skipIfNotFixed(3);
         Set<Issue> oldIssues = getIssues();
         Issue newIssue = new Issue().withSubject("Test issue").withDescription("New Test issue");
         int issueId = createIssue(newIssue);
@@ -37,9 +38,7 @@ public class RestTests {
     }
 
 
-    private Executor getExecutor() {
-        return Executor.newInstance().auth("7172fcb5f1888f5fac3dced24caeaa6a", "");
-    }
+
 
     private int createIssue(Issue newIssue) throws IOException {
         String json = getExecutor().execute(Request.Post("https://bugify.stqa.ru/api/issues.json")

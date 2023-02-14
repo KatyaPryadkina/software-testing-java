@@ -13,7 +13,7 @@ import java.util.Set;
 
 import static org.testng.Assert.assertEquals;
 
-public class RestAssuredTests {
+public class RestAssuredTests extends TestBase{
     @BeforeClass
     public void init(){
        // RestAssured.authentication = RestAssured.basic("7172fcb5f1888f5fac3dced24caeaa6a", "");  //неверная библиотека implementation("com.jayway.restassured:rest-assured-parent:2.9.0") и не ищет auth
@@ -22,6 +22,7 @@ public class RestAssuredTests {
 
     @Test
     public void testCreateIssue() throws IOException {
+        skipIfNotFixed(3);
         Set<Issue> oldIssues = getIssues();
         Issue newIssue = new Issue().withSubject("Test issue").withDescription("New Test issue");
         int issueId = createIssue(newIssue);
