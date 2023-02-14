@@ -31,7 +31,7 @@ public class RestTests {
     private Set<Issue> getIssues() throws IOException {            //способ работы с http во fluent-стиле
         String json = getExecutor().execute(Request.Get("https://bugify.stqa.ru/api/issues.json?limit=100")).returnContent().asString();   //получить списко всех баг-репортов в формате json
         JsonElement parsed = new JsonParser().parse(json);
-        JsonElement issues = parsed.getAsJsonObject().get("issue");//ищем (парсим) в теле json- issue
+        JsonElement issues = parsed.getAsJsonObject().get("issues");//ищем (парсим) в теле json- issue
 
         return new Gson().fromJson(issues, new TypeToken<Set<Issue>>() {}.getType());                          //преобразовываем в нужный вид
     }
