@@ -40,7 +40,7 @@ public class RemoveContactFromGroupTests extends TestBase {
 
         ContactData contact = app.db().contacts().iterator().next();
         Groups groupDelete = contact.getGroups();
-        app.contact().removeContactFromGroup(contact);
+        app.contact().removeContactFromGroups(contact);
         assertThat(app.db().contactInGroup(contact.getId()).getGroups().contains(groupDelete), equalTo(false)); //contains - модуль 8
     }
 }

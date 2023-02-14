@@ -122,7 +122,9 @@ public class ContactsHelper extends HelperBase {
         contactCache = null;
     }
 
-    public void removeContactFromGroup() {
+    public void removeContactFromGroups(ContactData contact) {
+        new Select(wd.findElement(By.name("group"))).selectByVisibleText(contact.getGroups().iterator().next().getName());
+        selectObjectById(contact.getId());
         removeFromGroup();
 
     }
