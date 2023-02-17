@@ -1,0 +1,16 @@
+apply plugin: 'java'
+
+
+repositories {//подключение места откуда будет тянутся библиотека
+    mavenCentral()
+}
+
+dependencies {
+    testImplementation 'io.rest-assured:rest-assured:5.3.0' // работа с rest-assured для чтения json и тестов сразу на нем (примитивные тесты на нем)
+    implementation("org.testng:testng:7.7.0")
+    implementation 'com.google.code.gson:gson:2.9.0'// библиотека для сериализации/десериализации json
+    implementation("org.apache.httpcomponents:httpclient:4.5.13")  //библиотека http
+    implementation("org.apache.httpcomponents:fluent-hc:4.5.13")
+    //implementation 'com.jayway.restassured:rest-assured:2.9.0'          // неверная библиотека, не подтягиваются некторые методы
+
+}
