@@ -7,9 +7,6 @@
       <module name="mantis-tests.test" target="17" />
       <module name="rest-sample.main" target="17" />
       <module name="rest-sample.test" target="17" />
-      <module name="sandbox" target="17" />
-      <module name="sandbox.main" target="17" />
-      <module name="sandbox.test" target="17" />
       <module name="soap-sample" target="17" />
       <module name="soap-sample.main" target="17" />
       <module name="soap-sample.test" target="17" />
