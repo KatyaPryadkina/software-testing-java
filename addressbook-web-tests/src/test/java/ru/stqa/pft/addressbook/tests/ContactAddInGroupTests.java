@@ -41,14 +41,18 @@ public class ContactAddInGroupTests extends TestBase {
     public void ContactAddInGroup() {
         Contacts contacts = app.db().contacts();
         ContactData contactSelect = contactOutsideTheGroup(contacts);
-        ContactData before = contactSelect;
-        GroupData addedGroup = groupOutsideTheContact();
+        int before = contactSelect.getGroups().size();
         app.contact().selectObjectById(contactSelect.getId());
         app.contact().addInGroup(groupOutsideTheContact().getName());
-        ContactData after = contactSelect.inGroup(addedGroup);
-
-        assertThat(after, equalTo(before));
+        Contacts allContacts = app.db().contacts();
+        ContactData selectAddAfter = findContact(allContacts, contactSelect.getId());
+        int after = selectAddAfter.getGroups().size();
+        assertThat(after, equalTo(before+1));
         verifyContactListInUI();
+    }
+
+    private ContactData findContact(Contacts contacts, int id){
+        return contacts.stream().filter((c) -> c.getId() == id).findFirst().get();
     }
 
     public GroupData groupOutsideTheContact() {
@@ -64,7 +68,8 @@ public class ContactAddInGroupTests extends TestBase {
     public ContactData contactOutsideTheGroup(Contacts contacts) {
         for (ContactData contact : contacts) {
             Set<GroupData> contactInGroup = contact.getGroups();
-            if (contactInGroup.size() < app.db().groups().size()) {
+            Groups allGroup=app.db().groups();
+            if (contactInGroup.size() < allGroup.size()) {
                 return contact;
             }
         }
